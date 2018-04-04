@@ -1,11 +1,11 @@
 package com.bandw.sparks;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -25,9 +25,9 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -87,10 +87,10 @@ public class PhotoGalleryFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_photogallery, container, false);
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.photo_gallery_recycler_view);
+        mProgressBar = view.findViewById(R.id.progressBar);
+        mRecyclerView = view.findViewById(R.id.photo_gallery_recycler_view);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         setUpAdapter();
         mRecyclerView.setAdapter(mPhotoAdapter);
@@ -172,7 +172,7 @@ public class PhotoGalleryFragment extends Fragment {
             case R.id.menu_item_polling:
                 boolean isAlarmOn = PollService.isAlarmOn(getActivity());
                 PollService.setAlarmService(getActivity(), !isAlarmOn);
-                getActivity().invalidateOptionsMenu();
+                Objects.requireNonNull(getActivity()).invalidateOptionsMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -220,7 +220,7 @@ public class PhotoGalleryFragment extends Fragment {
 
     private float convertDPToPixels(int dp) {
         DisplayMetrics metrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        Objects.requireNonNull(getActivity()).getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float logicalDensity = metrics.density;
         return dp * logicalDensity;
     }
@@ -239,18 +239,17 @@ public class PhotoGalleryFragment extends Fragment {
         RecyclerView.Adapter galleryAdapter = mRecyclerView.getAdapter();
         if (galleryAdapter != null && galleryAdapter.getItemCount() != 0) {
             int lastVisibleItemPosition = ((GridLayoutManager) mRecyclerView.getLayoutManager()).findLastCompletelyVisibleItemPosition();
-            if (lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == galleryAdapter.getItemCount() - 1) {
-                return true;
-            }
+            return lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == galleryAdapter.getItemCount() - 1;
         }
         return false;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class FetchItemsTask extends AsyncTask<Integer, Void, List<GalleryItem>> {
 
         private String mQuery;
 
-        public FetchItemsTask(String query) { mQuery = query; }
+        FetchItemsTask(String query) { mQuery = query; }
 
         @Override
         protected List<GalleryItem> doInBackground(Integer... params) {
@@ -276,7 +275,7 @@ public class PhotoGalleryFragment extends Fragment {
         private ImageView mImageView;
         private GalleryItem mGalleryItem;
 
-        public PhotoHolder(View itemView) {
+        PhotoHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.fragment_photo_gallery_image_view);
             itemView.setOnClickListener(this);
@@ -299,7 +298,7 @@ public class PhotoGalleryFragment extends Fragment {
     private class PhotoAdapter extends RecyclerView.Adapter<PhotoHolder> {
         List<GalleryItem> mItems;
 
-        public PhotoAdapter(List<GalleryItem> galleryItems) {
+        PhotoAdapter(List<GalleryItem> galleryItems) {
             mItems = galleryItems;
         }
 
@@ -311,17 +310,13 @@ public class PhotoGalleryFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(PhotoHolder holder, int position) {
+        public void onBindViewHolder(@NonNull PhotoHolder holder, int position) {
             GalleryItem galleryItem = mItems.get(position);
             mThumbnailDownloader.queueThumbnail(holder, galleryItem.getURL());
 
             //add a placeholder picture
             Drawable placeholder;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                placeholder = getResources().getDrawable(R.drawable.tommy, getActivity().getTheme());
-            } else {
-                placeholder = getResources().getDrawable(R.drawable.tommy);
-            }
+            placeholder = getResources().getDrawable(R.drawable.tommy, Objects.requireNonNull(getActivity()).getTheme());
             holder.bindDrawable(placeholder);
             holder.bindItem(galleryItem);
         }
@@ -331,7 +326,7 @@ public class PhotoGalleryFragment extends Fragment {
             return mItems.size();
         }
 
-        public void setItems(List<GalleryItem> galleryItems) {
+        void setItems(List<GalleryItem> galleryItems) {
             mItems = galleryItems;
             notifyDataSetChanged();
         }
