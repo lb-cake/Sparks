@@ -1,7 +1,8 @@
-package com.bandw.sparks;
+package com.bandw.sparks.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -11,6 +12,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.bandw.sparks.BottomNavigationBehavior;
+import com.bandw.sparks.SparksBaseHelper;
+import com.bandw.sparks.fragments.LocateFragment;
+import com.bandw.sparks.fragments.PhotoGalleryFragment;
+import com.bandw.sparks.R;
+import com.bandw.sparks.fragments.SavedFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    //create the database
+    public void createSparksDb() {
+        final SQLiteDatabase[] sparksDb = new SQLiteDatabase[1];
+        SparksBaseHelper.getInstance(this).getWritableDatabase(new SparksBaseHelper.onDBReadyListener() {
+            @Override
+            public void onDBReady(SQLiteDatabase db) {
+                sparksDb[0] = db;
+            }
+        });
     }
 
 }

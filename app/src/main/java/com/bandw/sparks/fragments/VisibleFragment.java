@@ -1,4 +1,4 @@
-package com.bandw.sparks;
+package com.bandw.sparks.fragments;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+
+import com.bandw.sparks.PollService;
 
 public class VisibleFragment extends Fragment {
 

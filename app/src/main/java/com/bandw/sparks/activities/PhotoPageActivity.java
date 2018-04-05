@@ -1,9 +1,12 @@
-package com.bandw.sparks;
+package com.bandw.sparks.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
+
+import com.bandw.sparks.fragments.PhotoPageFragment;
+import com.bandw.sparks.R;
 
 public class PhotoPageActivity extends SingleFragmentActivity {
 

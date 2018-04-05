@@ -1,7 +1,9 @@
-package com.bandw.sparks;
+package com.bandw.sparks.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -24,6 +26,16 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.bandw.sparks.AppUtils;
+import com.bandw.sparks.FlickrFetchr;
+import com.bandw.sparks.GalleryItem;
+import com.bandw.sparks.PollService;
+import com.bandw.sparks.QueryPreferences;
+import com.bandw.sparks.R;
+import com.bandw.sparks.SparksBaseHelper;
+import com.bandw.sparks.ThumbnailDownloader;
+import com.bandw.sparks.activities.PhotoPageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,10 +93,6 @@ public class PhotoGalleryFragment extends Fragment {
         // start FetchItems AsyncTAsk
         updateItems();
     }
-
-
-
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.bandw.sparks;
+package com.bandw.sparks.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.bandw.sparks.R;
 
 public class PhotoPageFragment extends VisibleFragment {
 
