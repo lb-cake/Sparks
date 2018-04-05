@@ -8,14 +8,4 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/menu_item_cancel"
-        android:title="@string/cancel"
-        app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/menu_item_polling"
-        android:title="@string/start_polling"
-        app:showAsAction="ifRoom"/>
-
 </menu>
