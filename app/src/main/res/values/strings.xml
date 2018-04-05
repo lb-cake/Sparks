@@ -20,4 +20,8 @@
     <string name="new_pictures_ticker">New PhotoGallery Pictures (Ticker)</string>
     <string name="new_pictures_title">New PhotoGallery Pictures (Title)</string>
     <string name="new_pictures_text">You have new pictures in PhotoGallery (Text)</string>
+
+    <!-- Preference Screen -->
+    <string name="pref_local">Use Current Location</string>
+    <string name="pref_local_summary">Let Sparks use your location to determine inspiration near you</string>
 </resources>

@@ -284,7 +284,8 @@ public class PhotoGalleryFragment extends Fragment {
         }
     }
 
-    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+        View.OnLongClickListener {
         private ImageView mImageView;
         private GalleryItem mGalleryItem;
 
@@ -305,6 +306,12 @@ public class PhotoGalleryFragment extends Fragment {
         @Override
         public void onClick(View v) {
             startActivity(PhotoPageActivity.newIntent(getActivity(), mGalleryItem.getPhotoPageUri()));
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            Log.d(TAG, "Long Pressed!");
+            return true;
         }
     }
 
