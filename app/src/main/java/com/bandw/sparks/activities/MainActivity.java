@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new PhotoGalleryFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_local:
+                    mTextMessage.setText(R.string.title_local);
                     fragment = new LocateFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_saved:
+                    mTextMessage.setText(R.string.title_saved);
                     fragment = new SavedFragment();
                     loadFragment(fragment);
                     return true;

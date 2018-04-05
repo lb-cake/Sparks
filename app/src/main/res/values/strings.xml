@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Sparks</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_local">Local</string>
+    <string name="title_saved">My Inspiration</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_home_fragment">Hello blank Home fragment</string>
