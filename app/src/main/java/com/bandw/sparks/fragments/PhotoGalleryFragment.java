@@ -131,12 +131,11 @@ public class PhotoGalleryFragment extends Fragment {
 
             void refreshItems() {
                 //Load items
+                submitQuery(null);
                 onItemsLoadComplete();
             }
 
             void onItemsLoadComplete() {
-                //Update the adapter and notify data set changed
-
                 //Stop refresh animation
                 mSwipeRefreshLayout.setRefreshing(false);
             }
