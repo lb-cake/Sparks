@@ -190,29 +190,6 @@ public class PhotoGalleryFragment extends Fragment {
                 searchView.setQuery(query, false);
             }
         });
-
-        final MenuItem menuItemPolling = menu.findItem(R.id.menu_item_polling);
-        if (PollService.isAlarmOn(getActivity())) {
-            menuItemPolling.setTitle(getString(R.string.stop_polling));
-        } else {
-            menuItemPolling.setTitle(getString(R.string.start_polling));
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_cancel:
-                submitQuery(null);
-                return true;
-            case R.id.menu_item_polling:
-                boolean isAlarmOn = PollService.isAlarmOn(getActivity());
-                PollService.setAlarmService(getActivity(), !isAlarmOn);
-                Objects.requireNonNull(getActivity()).invalidateOptionsMenu();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void submitQuery(String query) {
