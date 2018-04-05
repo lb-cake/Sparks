@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -54,6 +55,7 @@ public class PhotoGalleryFragment extends Fragment {
     private ThumbnailDownloader<PhotoHolder> mThumbnailDownloader;
     private Handler mHandler;
     private ProgressBar mProgressBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public PhotoGalleryFragment() {
         // Required empty public constructor
@@ -117,6 +119,26 @@ public class PhotoGalleryFragment extends Fragment {
             @Override
             public void onGlobalLayout() {
                 calculateCellSize();
+            }
+        });
+        mSwipeRefreshLayout = view.findViewById(R.id.photo_gallery_swipe_refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Refresh items
+                refreshItems();
+            }
+
+            void refreshItems() {
+                //Load items
+                onItemsLoadComplete();
+            }
+
+            void onItemsLoadComplete() {
+                //Update the adapter and notify data set changed
+
+                //Stop refresh animation
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 

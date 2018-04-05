@@ -11,10 +11,15 @@
         android:layout_gravity="center|top"
         android:layout_marginTop="10dp" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/photo_gallery_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/photo_gallery_recycler_view"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>
