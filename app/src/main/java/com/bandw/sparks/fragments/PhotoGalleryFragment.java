@@ -56,6 +56,7 @@ public class PhotoGalleryFragment extends Fragment {
     private Handler mHandler;
     private ProgressBar mProgressBar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
+    private String mQuery;
 
     public PhotoGalleryFragment() {
         // Required empty public constructor
@@ -131,7 +132,11 @@ public class PhotoGalleryFragment extends Fragment {
 
             void refreshItems() {
                 //Load items
-                submitQuery(null);
+                if (mQuery==null) {
+                    submitQuery(null);
+                } else {
+                    submitQuery(mQuery);
+                }
                 onItemsLoadComplete();
             }
 
@@ -158,10 +163,12 @@ public class PhotoGalleryFragment extends Fragment {
 
         final MenuItem menuItemSearch = menu.findItem(R.id.menu_item_search);
         final SearchView searchView = (SearchView) menuItemSearch.getActionView();
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d(TAG, "QueryTextSubmit: " + query);
+                mQuery = query;
                 AppUtils.hideKeyboard(getActivity(), searchView);
                 menuItemSearch.collapseActionView();
                 showProgressBar();
