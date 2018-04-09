@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,7 +17,7 @@ import com.bandw.sparks.R;
  * A simple {@link Fragment} subclass.
  */
 public class SavedFragment extends Fragment {
-    private static final String TAg = "SavedFragment";
+    private static final String TAG = "SavedFragment";
 
     public SavedFragment() {
         // Required empty public constructor
@@ -42,6 +43,20 @@ public class SavedFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.fragment_saved, menu);
+
+        MenuItem settingButton = menu.findItem(R.id.menu_settings);
+        settingButton.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                //Display the settings fragment
+                assert getFragmentManager() != null;
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.frame_container, new SettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            }
+        });
     }
 
 }

@@ -22,7 +22,6 @@ import com.bandw.sparks.fragments.SavedFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
 
     public static Intent newIntent(Context context) {
         return new Intent(context, MainActivity.class);
@@ -36,17 +35,14 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
                     fragment = new PhotoGalleryFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_local:
-                    mTextMessage.setText(R.string.title_local);
                     fragment = new LocateFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_saved:
-                    mTextMessage.setText(R.string.title_saved);
                     fragment = new SavedFragment();
                     loadFragment(fragment);
                     return true;
@@ -60,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 

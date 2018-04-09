@@ -2,14 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bandw.sparks">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <meta-data
         android:name="com.google.gms.version"
         android:value="@integer/google_play_services_version" />
 
-    <!--         The API key for Google Maps-based APIs -->
+    <!-- The API key for Google Maps-based APIs -->
     <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="@string/google_maps_key" />
@@ -38,21 +38,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name="com.bandw.sparks.activities.PhotoPageActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:name=".activities.PhotoPageActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
 
-        <service android:name="com.bandw.sparks.PollService"/>
-        <receiver android:name="com.bandw.sparks.StartupReceiver" >
+        <service android:name=".PollService" />
+
+        <receiver android:name=".StartupReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
-        <receiver android:name="com.bandw.sparks.NotificationReceiver">
+        <receiver android:name=".NotificationReceiver">
             <intent-filter android:priority="-999">
-                <action android:name="com.bandw.testsparks.ACTION_SHOW_NOTIFICATION"/>
+                <action android:name="com.bandw.testsparks.ACTION_SHOW_NOTIFICATION" />
             </intent-filter>
         </receiver>
 
