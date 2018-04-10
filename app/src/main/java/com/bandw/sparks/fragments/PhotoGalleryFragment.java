@@ -2,8 +2,7 @@ package com.bandw.sparks.fragments;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -13,6 +12,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -31,10 +31,8 @@ import android.widget.ProgressBar;
 import com.bandw.sparks.AppUtils;
 import com.bandw.sparks.FlickrFetchr;
 import com.bandw.sparks.GalleryItem;
-import com.bandw.sparks.PollService;
 import com.bandw.sparks.QueryPreferences;
 import com.bandw.sparks.R;
-import com.bandw.sparks.SparksBaseHelper;
 import com.bandw.sparks.ThumbnailDownloader;
 import com.bandw.sparks.activities.PhotoPageActivity;
 
@@ -293,6 +291,7 @@ public class PhotoGalleryFragment extends Fragment {
             super(itemView);
             mImageView = itemView.findViewById(R.id.fragment_photo_gallery_image_view);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         public void bindDrawable(Drawable drawable) {
@@ -311,6 +310,22 @@ public class PhotoGalleryFragment extends Fragment {
         @Override
         public boolean onLongClick(View v) {
             Log.d(TAG, "Long Pressed!");
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_save_url)
+                    .setPositiveButton(R.string.dialog_save, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //TODO: Save to database
+                            Log.d(TAG, "Save to database");
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //User cancelled the dialog
+                        }
+                    });
+            builder.create().show();
             return true;
         }
     }
