@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
-import com.bandw.sparks.GalleryItem;
+import com.bandw.sparks.db.GalleryItem;
 import com.bandw.sparks.R;
 import com.bandw.sparks.activities.PhotoPageActivity;
 

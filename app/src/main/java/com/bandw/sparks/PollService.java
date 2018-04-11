@@ -12,6 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.bandw.sparks.activities.MainActivity;
+import com.bandw.sparks.db.GalleryItem;
 
 import java.util.List;
 

@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-@Database(entities = {Image.class}, version = 1)
+@Database(entities = {Image.class, GalleryItem.class}, version = 1)
 public abstract class SparksDatabase extends RoomDatabase {
 
     /**
@@ -13,6 +13,12 @@ public abstract class SparksDatabase extends RoomDatabase {
      */
     @SuppressWarnings("WeakerAccess")
     public abstract ImageDao imageDao();
+
+    /**
+     * @return the DAO for the gallery_item table
+     */
+    @SuppressWarnings("WeakerAccess")
+    public abstract GalleryItemDao itemDao();
 
     /** The only instance **/
     private static SparksDatabase sInstance;

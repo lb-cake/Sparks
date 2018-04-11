@@ -1,10 +1,19 @@
-package com.bandw.sparks;
+package com.bandw.sparks.db;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "gallery_item")
 public class GalleryItem {
+
+    @PrimaryKey
+    @ColumnInfo(name = "_id")
+    private int _id;
 
     @SerializedName("id")
     private String mId;
@@ -17,6 +26,10 @@ public class GalleryItem {
 
     @SerializedName("owner")
     private String mOwner;
+
+    public int get_id() { return _id;}
+
+    public void set_id(int id) {this._id = id; }
 
     public String getId() {
         return mId;
