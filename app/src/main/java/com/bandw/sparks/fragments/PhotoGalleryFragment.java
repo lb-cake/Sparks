@@ -35,6 +35,9 @@ import com.bandw.sparks.QueryPreferences;
 import com.bandw.sparks.R;
 import com.bandw.sparks.ThumbnailDownloader;
 import com.bandw.sparks.activities.PhotoPageActivity;
+import com.bandw.sparks.db.Image;
+import com.bandw.sparks.db.ImageDao;
+import com.bandw.sparks.db.SparksDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

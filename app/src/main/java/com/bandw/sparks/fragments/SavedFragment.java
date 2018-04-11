@@ -24,8 +24,8 @@ public class SavedFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstaceState) {
-        super.onCreate(savedInstaceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         // Orientation change handling
         setRetainInstance(true);
         // Toolbar Menu
