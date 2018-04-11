@@ -297,11 +297,11 @@ public class PhotoGalleryFragment extends Fragment {
             itemView.setOnLongClickListener(this);
         }
 
-        public void bindDrawable(Drawable drawable) {
+        void bindDrawable(Drawable drawable) {
             mImageView.setImageDrawable(drawable);
         }
 
-        public void bindItem(GalleryItem galleryItem) {
+        void bindItem(GalleryItem galleryItem) {
             mGalleryItem = galleryItem;
         }
 

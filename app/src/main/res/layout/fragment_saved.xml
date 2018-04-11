@@ -5,4 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".fragments.SavedFragment">
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/saved_recycler_view"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical" />
+
 </FrameLayout>
