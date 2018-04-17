@@ -35,6 +35,7 @@ import com.bandw.sparks.QueryPreferences;
 import com.bandw.sparks.R;
 import com.bandw.sparks.ThumbnailDownloader;
 import com.bandw.sparks.activities.PhotoPageActivity;
+import com.bandw.sparks.db.GalleryItemDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -317,6 +318,7 @@ public class PhotoGalleryFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO: Save to database
                             Log.d(TAG, "Save to database");
+
                         }
                     })
                     .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

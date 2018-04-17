@@ -13,7 +13,7 @@ public class SparksBaseHelper extends SQLiteOpenHelper {
     private static SparksBaseHelper sparksDb;
 
     //singleton pattern
-    private SparksBaseHelper(Context context) { super(context, DATABASE_NAME, null, VERSION); }
+    SparksBaseHelper(Context context) { super(context, DATABASE_NAME, null, VERSION); }
 
     public static synchronized SparksBaseHelper getInstance(Context context) {
         if (sparksDb == null)

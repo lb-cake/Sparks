@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import com.bandw.sparks.GalleryLab;
 import com.bandw.sparks.db.GalleryItem;
 import com.bandw.sparks.R;
 import com.bandw.sparks.activities.PhotoPageActivity;
@@ -70,6 +71,7 @@ public class SavedFragment extends Fragment {
                 calculateSize();
             }
         });
+        updateUI();
         return view;
     }
 
@@ -119,6 +121,13 @@ public class SavedFragment extends Fragment {
                 mPhotoAdapter.setItems(mGalleryItems);
             }
         }
+    }
+
+    private void updateUI() {
+        GalleryLab galleryLab = GalleryLab.get(getActivity());
+        List<GalleryItem> items = galleryLab.getGalleryItems();
+        mPhotoAdapter = new PhotoAdapter(items);
+        mRecyclerView.setAdapter(mPhotoAdapter);
     }
 
     private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
