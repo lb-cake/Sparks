@@ -71,6 +71,14 @@ public class GalleryLab {
                 new String[] {id});
     }
 
+    public void deleteGalleryItem(GalleryItem galleryItem) {
+        String id = galleryItem.getId();
+        ContentValues values = getContentValues(galleryItem);
+
+        mDatabase.delete(SavedTable.NAME, SavedTable.Columns.UUID + " = ?",
+                new String[] {id});
+    }
+
     private GalleryItemCursorWrapper queryGalleryItems(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 SavedTable.NAME,
@@ -89,7 +97,7 @@ public class GalleryLab {
         values.put(SavedTable.Columns.UUID, galleryItem.getId());
         values.put(SavedTable.Columns.TITLE, galleryItem.getCaption());
         values.put(SavedTable.Columns.URL, galleryItem.getURL());
-        values.put(SavedTable.Columns.OWNER, galleryItem.getURL());
+        values.put(SavedTable.Columns.OWNER, galleryItem.getOwner());
         return values;
     }
 }

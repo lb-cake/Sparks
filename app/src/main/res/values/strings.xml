@@ -17,6 +17,8 @@
     <!-- Dialog -->
     <string name="dialog_save_url">Save Photo?</string>
     <string name="dialog_save">SAVE</string>
+    <string name="dialog_delete_message">Delete Photo?</string>
+    <string name="dialog_delete">DELETE</string>
 
     <!-- Preference Screen -->
     <string name="pref_local">Use Current Location</string>

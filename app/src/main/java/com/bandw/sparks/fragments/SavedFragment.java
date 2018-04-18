@@ -2,6 +2,8 @@ package com.bandw.sparks.fragments;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -45,6 +47,7 @@ public class SavedFragment extends Fragment {
     private List<GalleryItem> mGalleryItems = new ArrayList<>();
     private ThumbnailDownloader<PhotoHolder> mThumbnailDownloader;
     private Handler mHandler;
+    private GalleryLab mGalleryLab;
 
 
     public SavedFragment() {
@@ -60,6 +63,7 @@ public class SavedFragment extends Fragment {
         setHasOptionsMenu(true);
         // init UI Thread Handler
         mHandler = new Handler();
+        mGalleryLab = GalleryLab.get(getActivity());
         // init HandlerThread (Message Loop)
         mThumbnailDownloader = new ThumbnailDownloader<>();
         mThumbnailDownloader.start();
@@ -167,7 +171,8 @@ public class SavedFragment extends Fragment {
         mRecyclerView.setAdapter(mPhotoAdapter);
     }
 
-    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+        View.OnLongClickListener {
         private ImageView mImageView;
         private GalleryItem mGalleryItem;
 
@@ -175,6 +180,7 @@ public class SavedFragment extends Fragment {
             super(itemView);
             mImageView = itemView.findViewById(R.id.fragment_photo_gallery_image_view);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         void bindDrawable(Drawable drawable) { mImageView.setImageDrawable(drawable); }
@@ -184,6 +190,28 @@ public class SavedFragment extends Fragment {
         public void onClick(View view) {
             Log.i(TAG, mGalleryItem.toString());
             startActivity(PhotoPageActivity.newIntent(getActivity(), mGalleryItem.getPhotoPageUri()));
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_delete_message)
+                    .setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Delete from database using the GalleryItem Lab
+                            Log.i(TAG, "deleting " + mGalleryItem.toString() + " from db");
+
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //User cancelled the dialog
+                        }
+                    });
+            builder.create().show();
+            return true;
         }
     }
 

@@ -308,6 +308,7 @@ public class PhotoGalleryFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            Log.i(TAG, mGalleryItem.toString());
             startActivity(PhotoPageActivity.newIntent(getActivity(), mGalleryItem.getPhotoPageUri()));
         }
 
