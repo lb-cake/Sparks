@@ -36,6 +36,7 @@ import com.bandw.sparks.R;
 import com.bandw.sparks.ThumbnailDownloader;
 import com.bandw.sparks.activities.PhotoPageActivity;
 import com.bandw.sparks.db.GalleryItemDao;
+import com.bandw.sparks.db.GalleryLab;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,7 @@ public class PhotoGalleryFragment extends Fragment {
     private ProgressBar mProgressBar;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private String mQuery;
+    private GalleryLab mGalleryLab;
 
     public PhotoGalleryFragment() {
         // Required empty public constructor
@@ -76,6 +78,7 @@ public class PhotoGalleryFragment extends Fragment {
         // init UI Thread Handler
         mHandler = new Handler();
         // init HandlerThread (Message Loop)
+        mGalleryLab = GalleryLab.get(getActivity());
         mThumbnailDownloader = new ThumbnailDownloader<>();
         mThumbnailDownloader.start();
         mThumbnailDownloader.getLooper();
@@ -318,6 +321,7 @@ public class PhotoGalleryFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO: Save to database
                             Log.d(TAG, "Save to database");
+                            mGalleryLab.addGalleryItem(mGalleryItem);
 
                         }
                     })

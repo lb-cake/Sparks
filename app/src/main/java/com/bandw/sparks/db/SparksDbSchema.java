@@ -1,4 +1,4 @@
-package com.bandw.sparks;
+package com.bandw.sparks.db;
 
 import android.database.sqlite.SQLiteDatabase;
 

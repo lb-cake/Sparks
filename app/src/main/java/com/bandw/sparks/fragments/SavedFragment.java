@@ -1,8 +1,13 @@
 package com.bandw.sparks.fragments;
 
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,7 +22,9 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
-import com.bandw.sparks.GalleryLab;
+import com.bandw.sparks.QueryPreferences;
+import com.bandw.sparks.ThumbnailDownloader;
+import com.bandw.sparks.db.GalleryLab;
 import com.bandw.sparks.db.GalleryItem;
 import com.bandw.sparks.R;
 import com.bandw.sparks.activities.PhotoPageActivity;
@@ -35,6 +42,9 @@ public class SavedFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PhotoAdapter mPhotoAdapter;
     private List<GalleryItem> mGalleryItems = new ArrayList<>();
+    private ThumbnailDownloader<PhotoHolder> mThumbnailDownloader;
+    private Handler mHandler;
+
 
     public SavedFragment() {
         // Required empty public constructor
@@ -47,6 +57,32 @@ public class SavedFragment extends Fragment {
         setRetainInstance(true);
         // Toolbar Menu
         setHasOptionsMenu(true);
+        // init UI Thread Handler
+        mHandler = new Handler();
+        // init HandlerThread (Message Loop)
+        mThumbnailDownloader = new ThumbnailDownloader<>();
+        mThumbnailDownloader.start();
+        mThumbnailDownloader.getLooper();
+        mThumbnailDownloader.setThumbnailDownloadListener(
+                new ThumbnailDownloader.ThumbnailDownloadListener<PhotoHolder>() {
+                    @Override
+                    public void onThumbnailDownloaded(final PhotoHolder target, final Bitmap bitmap) {
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                                target.bindDrawable(drawable);
+                            }
+                        });
+                    }
+                }
+        );
+        //start FetchItems AsyncTask
+        updateItems();
+    }
+
+    //FIXME
+    private void updateItems() {
     }
 
     @Override
@@ -130,6 +166,10 @@ public class SavedFragment extends Fragment {
         mRecyclerView.setAdapter(mPhotoAdapter);
     }
 
+    @SuppressLint("StaticFieldLeak")
+    private class FetchItemsTask extends AsyncTask<Void, Void, Void> {
+
+    }
     private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mImageView;
         private GalleryItem mGalleryItem;

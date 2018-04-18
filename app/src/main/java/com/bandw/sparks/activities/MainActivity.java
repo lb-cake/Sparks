@@ -11,10 +11,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.bandw.sparks.BottomNavigationBehavior;
-import com.bandw.sparks.SparksBaseHelper;
+import com.bandw.sparks.db.SparksBaseHelper;
 import com.bandw.sparks.fragments.LocateFragment;
 import com.bandw.sparks.fragments.PhotoGalleryFragment;
 import com.bandw.sparks.R;

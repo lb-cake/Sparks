@@ -1,11 +1,11 @@
-package com.bandw.sparks;
+package com.bandw.sparks.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 
-import com.bandw.sparks.SparksDbSchema.SavedTable;
+import com.bandw.sparks.db.SparksDbSchema.SavedTable;
 
 public class SparksBaseHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
@@ -25,7 +25,9 @@ public class SparksBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + SavedTable.NAME + "(" +
                 SavedTable.Columns.UUID + ", " +
+                SavedTable.Columns.URL + ", " +
                 SavedTable.Columns.TITLE + ", " +
+                SavedTable.Columns.OWNER + ", " +
                 SavedTable.Columns.DATE +
                 ")"
         );
