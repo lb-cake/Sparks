@@ -201,6 +201,8 @@ public class SavedFragment extends Fragment {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             //Delete from database using the GalleryItem Lab
                             Log.i(TAG, "deleting " + mGalleryItem.toString() + " from db");
+                            mGalleryLab.deleteGalleryItem(mGalleryItem);
+                            updateUI();
 
                         }
                     })
