@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -166,10 +167,6 @@ public class SavedFragment extends Fragment {
         mRecyclerView.setAdapter(mPhotoAdapter);
     }
 
-    @SuppressLint("StaticFieldLeak")
-    private class FetchItemsTask extends AsyncTask<Void, Void, Void> {
-
-    }
     private class PhotoHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private ImageView mImageView;
         private GalleryItem mGalleryItem;
@@ -177,6 +174,7 @@ public class SavedFragment extends Fragment {
         PhotoHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.fragment_photo_gallery_image_view);
+            itemView.setOnClickListener(this);
         }
 
         void bindDrawable(Drawable drawable) { mImageView.setImageDrawable(drawable); }
@@ -184,6 +182,7 @@ public class SavedFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            Log.i(TAG, mGalleryItem.toString());
             startActivity(PhotoPageActivity.newIntent(getActivity(), mGalleryItem.getPhotoPageUri()));
         }
     }

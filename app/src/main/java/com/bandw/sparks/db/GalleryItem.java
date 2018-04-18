@@ -73,6 +73,6 @@ public class GalleryItem {
 
     @Override
     public String toString() {
-        return "mId: " + mId + ", mURL: " + mURL + ", mCaption: " + mCaption;
+        return "Id: " + mId + ", URL: " + mURL + ", Caption: " + mCaption;
     }
 }

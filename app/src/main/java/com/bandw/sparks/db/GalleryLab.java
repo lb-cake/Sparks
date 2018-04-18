@@ -34,16 +34,12 @@ public class GalleryLab {
     public List<GalleryItem> getGalleryItems() {
         List<GalleryItem> items = new ArrayList<>();
 
-        GalleryItemCursorWrapper cursor = queryGalleryItems(null, null);
-
-        try {
+        try (GalleryItemCursorWrapper cursor = queryGalleryItems(null, null)) {
             cursor.moveToFirst();
             while (!cursor.isAfterLast()) {
                 items.add(cursor.getGalleryItem());
                 cursor.moveToNext();
             }
-        } finally {
-            cursor.close();
         }
         return items;
     }
