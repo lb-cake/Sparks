@@ -84,6 +84,7 @@ public class FlickrFetchr {
         return fetchItems(uri);
     }
 
+
     private List<GalleryItem> fetchItems(Uri uri) {
         List<GalleryItem> galleryItems = new ArrayList<>();
         try {
@@ -106,4 +107,6 @@ public class FlickrFetchr {
         }
         return galleryItems;
     }
+
+
 }
